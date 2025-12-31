@@ -5,16 +5,13 @@ import { Outlet } from 'react-router-dom'
 export default function MainLayout() {
   return (
     <div className='h-screen'>
-
-    <div className='bg-gray-100 h-auto w-full'>
+      <div className='bg-gray-100 h-auto w-full'>
         <div className='p-3'>
-      <Navbar/>
+          <Navbar />
         </div>
 
-      <Outlet/>
-    </div>
+        <Outlet />
+      </div>
     </div>
   )
 }
-
-

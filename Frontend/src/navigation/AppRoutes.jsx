@@ -1,14 +1,14 @@
-import { createBrowserRouter } from "react-router-dom";
-import Home from "../pages/Home";
-import About from "../pages/About";
-import MainLayout from "../layout/MainLayout";
-import Blogs from "../pages/Blogs";
-import AddBlog from "../pages/AddBlog";
-import BlogDetails from "../pages/BlogDetails";
+import { createBrowserRouter } from 'react-router-dom'
+import Home from '../pages/Home'
+import About from '../pages/About'
+import MainLayout from '../layout/MainLayout'
+import Blogs from '../pages/Blogs'
+import AddBlog from '../pages/AddBlog'
+import BlogDetails from '../pages/BlogDetails'
 
 const AppRouter = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <MainLayout />,
     children: [
       {
@@ -16,24 +16,23 @@ const AppRouter = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "about",
+        path: 'about',
         element: <About />,
       },
       {
-        path: "blogs",
+        path: 'blogs',
         element: <Blogs />,
       },
       {
-        path: "add-blog",
+        path: 'add-blog',
         element: <AddBlog />,
       },
       {
-        path: "/blog/:id",
-        element: <BlogDetails/>,
+        path: '/blog/:id',
+        element: <BlogDetails />,
       },
     ],
-    
   },
-]);
+])
 
-export default AppRouter;
+export default AppRouter
