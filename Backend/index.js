@@ -39,18 +39,12 @@ io.on('connection', (socket) => {
 
   socket.emit(
     'load_blogs',
-    blogs.filter((b) => b.status === 'published')
+    blogs.filter((b) => b.status === 'published'),
   )
 
   // Create blog
   socket.on('new_blog', (data) => {
-    const {
-      title,
-      description,
-      image,
-      category,
-      publishAt,
-    } = data
+    const { title, description, image, category, publishAt } = data
 
     if (!title || !description || !category) return
 
@@ -87,28 +81,23 @@ io.on('connection', (socket) => {
     io.to(blogId).emit('receive_comment', comment)
   })
 
-socket.on('delete_blog', (blogId) => {
-  const index = blogs.findIndex((b) => b.id === blogId)
+  socket.on('delete_blog', (blogId) => {
+    const index = blogs.findIndex((b) => b.id === blogId)
 
-  if (index !== -1) {
-    const deletedBlog = blogs[index]
-    blogs.splice(index, 1)
+    if (index !== -1) {
+      const deletedBlog = blogs[index]
+      blogs.splice(index, 1)
 
-    delete comments[blogId]
+      delete comments[blogId]
 
-    console.log(`🗑️ Blog deleted: ${deletedBlog.title}`)
+      console.log(`🗑️ Blog deleted: ${deletedBlog.title}`)
 
-    // notify all clients
-    io.emit('blog_deleted', blogId)
-  }
+      // notify all clients
+      io.emit('blog_deleted', blogId)
+    }
+  })
+
+  socket.on('disconnect', () => console.log('User disconnected:', socket.id))
 })
 
-
-  socket.on('disconnect', () =>
-    console.log('User disconnected:', socket.id)
-  )
-})
-
-server.listen(PORT, () =>
-  console.log(`Server running on ${PORT}`)
-)
+server.listen(PORT, () => console.log(`Server running on ${PORT}`))

@@ -25,9 +25,8 @@ export default function Blogs() {
     })
 
     socketRef.current.on('blog_deleted', (blogId) => {
-  dispatch(deleteBlog(blogId))
-})
-
+      dispatch(deleteBlog(blogId))
+    })
 
     return () => {
       socketRef.current.disconnect()

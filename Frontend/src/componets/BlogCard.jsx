@@ -47,11 +47,11 @@ export default function BlogCard({ blog }) {
             Read More →
           </button>
           <button
-        onClick={handleDelete}
-        className="mt-3 bg-red-500 text-white px-4 py-1 rounded"
-      >
-        Delete
-      </button>
+            onClick={handleDelete}
+            className='mt-3 bg-red-500 text-white px-4 py-1 rounded'
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>

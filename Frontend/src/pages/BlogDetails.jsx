@@ -5,7 +5,7 @@ import { io } from 'socket.io-client'
 export default function BlogDetails() {
   const blog = useSelector((state) => state.blog.selectedBlog)
 
-  const socketRef = useRef(null) 
+  const socketRef = useRef(null)
   const [comments, setComments] = useState([])
   const [form, setForm] = useState({ name: '', comment: '' })
 
