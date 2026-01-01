@@ -87,6 +87,23 @@ io.on('connection', (socket) => {
     io.to(blogId).emit('receive_comment', comment)
   })
 
+socket.on('delete_blog', (blogId) => {
+  const index = blogs.findIndex((b) => b.id === blogId)
+
+  if (index !== -1) {
+    const deletedBlog = blogs[index]
+    blogs.splice(index, 1)
+
+    delete comments[blogId]
+
+    console.log(`🗑️ Blog deleted: ${deletedBlog.title}`)
+
+    // notify all clients
+    io.emit('blog_deleted', blogId)
+  }
+})
+
+
   socket.on('disconnect', () =>
     console.log('User disconnected:', socket.id)
   )

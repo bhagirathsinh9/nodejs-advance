@@ -3,7 +3,7 @@ import BlogCard from '../componets/BlogCard'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { io } from 'socket.io-client'
-import { addBlog, setBlogs } from '../redux/blogSlice'
+import { addBlog, deleteBlog, setBlogs } from '../redux/blogSlice'
 
 export default function Blogs() {
   const { blogs } = useSelector((store) => store.blog)
@@ -23,6 +23,11 @@ export default function Blogs() {
     socketRef.current.on('receive_blog', (blog) => {
       dispatch(addBlog(blog))
     })
+
+    socketRef.current.on('blog_deleted', (blogId) => {
+  dispatch(deleteBlog(blogId))
+})
+
 
     return () => {
       socketRef.current.disconnect()

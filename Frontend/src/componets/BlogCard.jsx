@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { setSelectedBlog } from '../redux/blogSlice'
 import { useDispatch } from 'react-redux'
+import socket from '../socket'
 
 export default function BlogCard({ blog }) {
   const navigate = useNavigate()
@@ -11,7 +12,11 @@ export default function BlogCard({ blog }) {
     dispatch(setSelectedBlog(blog))
     navigate(`/blog/${blog.id}`)
   }
-
+  const handleDelete = () => {
+    if (confirm('Are you sure you want to delete this blog?')) {
+      socket.emit('delete_blog', blog.id)
+    }
+  }
   return (
     <div className='bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden'>
       <div
@@ -41,6 +46,12 @@ export default function BlogCard({ blog }) {
           >
             Read More →
           </button>
+          <button
+        onClick={handleDelete}
+        className="mt-3 bg-red-500 text-white px-4 py-1 rounded"
+      >
+        Delete
+      </button>
         </div>
       </div>
     </div>
